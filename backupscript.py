@@ -3,17 +3,17 @@ import netmiko
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetMikoTimeoutException
 from netmiko.ssh_exception import AuthenticationException
-from paramkio.ssh_exception import SSHException
+from paramiko.ssh_exception import SSHException
 from getpass import getpass
 
 USERNAME= input("Please enter your ssh Username: ")
 PASS= getpass("Please enter your ssh Password: ")
 
 device = {
-    'ip': '192.168.1.10',
+    'ip': '192.168.108.1',
     'username': USERNAME,
     'password': PASS,
-    'device_type': 'cisco_iso'
+    'device_type': 'cisco_ios'
 }
 
 
@@ -27,7 +27,7 @@ except (NetMikoTimeoutException):
     print ("This device has timed out: " + device['ip'])
 except (AuthenticationException):
     print ("Authentication failure by: " + device['ip'])
-except (ssh_exception):
+except (SSHException):
     print("Could not establish connection via SSH. Check SSH configuration on: " + device['ip'])
 
 print("This task has been completed...")
